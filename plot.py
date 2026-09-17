@@ -1,16 +1,25 @@
 # /// script
 # requires-python = ">=3.10"
+# dependencies = ["matplotlib"]
 # ///
 
 from pathlib import Path
 from zipfile import ZipFile
 import csv
+import matplotlib.pyplot as plt
+
 
 HERE = Path(__file__).parent
 DATA = HERE / "data" / "hk-jellyfish.zip"
+OUT = HERE / "out"
 
 
 def main():
+    OUT.mkdir(exist_ok=True)
+
+    latitudes = []
+    longitudes = []
+
     with ZipFile(DATA) as z:
         with z.open("occurrence.txt") as f:
             reader = csv.DictReader(
@@ -18,18 +27,28 @@ def main():
                 delimiter="\t",
             )
 
-            first_row = next(reader)
+            for row in reader:
+                if row["decimalLatitude"] and row["decimalLongitude"]:
+                    latitudes.append(float(row["decimalLatitude"]))
+                    longitudes.append(float(row["decimalLongitude"]))
 
-            print("First row:")
-            print(first_row)
+    plt.figure(figsize=(8, 8))
 
-            value = first_row["decimalLatitude"]
+    plt.scatter(
+        longitudes,
+        latitudes,
+        s=12,
+        alpha=0.5,
+    )
 
-            print("\nOne value:")
-            print(value)
+    plt.xlabel("Longitude")
+    plt.ylabel("Latitude")
+    plt.title("Jellyfish Observations in Hong Kong")
 
-            print("\nType:")
-            print(type(value))
+    plt.savefig(OUT / "jellyfish-observations.png", dpi=300)
+    plt.savefig(OUT / "jellyfish-observations.svg")
+
+    plt.show()
 
 
 if __name__ == "__main__":
