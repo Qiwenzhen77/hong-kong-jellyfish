@@ -1,34 +1,27 @@
-# hong-kong-jellyfish
+# Hong Kong Jellyfish
 
-## What is this?
+## The phenomenon
 
-This project visualizes jellyfish observations in Hong Kong.
+Jellyfish observations in Hong Kong waters rise and fall through time and are
+not spread evenly across the coastline. I looked at this phenomenon because
+citizen-science records can show both seasonal changes and the places where
+people are most likely to encounter jellyfish. The dataset covers observations
+from 2021 to 2025, so it also makes a useful small record of change over time.
 
-The natural phenomenon is jellyfish occurrence in Hong Kong waters. The dataset contains real observations collected from 2021 to 2025.
+## The source
 
-## Data source
+The data comes from the [Jellyfish in Hong Kong: a citizen science dataset](https://ipt.taibif.tw/resource?r=hk-jellyfish), published through TaiBIF. The downloaded file contains 1,536 rows; each row represents one observation, with latitude and longitude in decimal degrees, `eventDate` as an observation date, `scientificName` as the recorded species, and `individualCount` as a count of individuals.
 
-The data comes from the [Jellyfish in Hong Kong: a citizen science dataset](https://ipt.taibif.tw/resource?r=hk-jellyfish) published through TaiBIF.
-
-The dataset contains 1,536 observation records in the current dataset version.
-
-## Visualization
-
-The visualization shows the geographic distribution of jellyfish observations in Hong Kong. Each observation is drawn as a small jellyfish rather than a generic dot. The latitude and longitude place the jellyfish on the map. Its colour is controlled by the recorded `scientificName`, while its size is scaled from the real `individualCount` field. This keeps the visual changes tied to the data rather than to decorative randomness.
-
-The animated version reveals the observations in chronological order using the recorded `eventDate`. The date label moves from 2021 to 2025 as the observation record grows, so the animation shows when and where the observations accumulated. The static image shows the complete dataset.
+## The picture
 
 ![Jellyfish observations in Hong Kong](out/jellyfish-observations.png)
 
 ![Animated jellyfish observations in Hong Kong](out/jellyfish-observations.gif)
 
+Each observation is drawn as a jellyfish glyph at its recorded longitude and latitude. Colour represents `scientificName`, size represents `individualCount`, and the GIF reveals the observations in chronological order using `eventDate`. The picture hides exact coastlines, observation photographs, time of day, and uncertainty in the locations; it also makes overlapping observations look like one cluster, so it is a summary rather than a complete map of jellyfish abundance.
+
 ## How to run
 
-Run the following commands from the project folder:
-
 ```bash
-uv run fetch.py
 uv run plot.py
 ```
-
-The plotting script writes a PNG, SVG, and animated GIF into `out/`. The GIF can be viewed directly on GitHub, while the SVG preserves the jellyfish shapes for closer inspection.
