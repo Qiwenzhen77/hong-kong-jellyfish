@@ -1,0 +1,11 @@
+name: Check assignment 2
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  check:
+    uses: sd5913/pfad/.github/workflows/check.yml@2026
+    with:
+      assignment: "2"
