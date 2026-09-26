@@ -25,3 +25,7 @@ Each observation is drawn as a jellyfish glyph at its recorded longitude and lat
 ```bash
 uv run plot.py
 ```
+
+## Interactive Web Page
+
+[View the interactive jellyfish visualization](https://qiwenzhen77.github.io/hong-kong-jellyfish/)
